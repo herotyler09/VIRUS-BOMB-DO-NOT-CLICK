@@ -1,57 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>You Have Been Hacked</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: black;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: sans-serif;
+      margin: 0; padding: 0; height: 100%; background: black;
+      color: white; display: flex; justify-content: center; align-items: center;
+      font-family: sans-serif; overflow: hidden;
     }
     #start-btn {
-      font-size: 24px;
-      padding: 1em 2em;
-      background: red;
-      color: white;
-      border: none;
-      cursor: pointer;
+      font-size: 24px; padding: 1em 2em; background: red; color: white;
+      border: none; cursor: pointer; z-index: 2;
     }
-    #frame-container {
-      display: none;
-      width: 100vw;
-      height: 100vh;
+    #video-container {
+      display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;
+      z-index: 1; background: black; display: flex; justify-content: center; align-items: center;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    video {
+      width: 100%; height: 100%; object-fit: cover; background: black; display: none;
     }
   </style>
 </head>
 <body>
   <button id="start-btn">CLICK TO Get Your Files Back</button>
-  <div id="frame-container">
-    <iframe 
-      src="https://www.youtube.com/embed/2qBlE2-WL60?autoplay=1&rel=0&modestbranding=1&controls=0&fs=0&playlist=2qBlE2-WL60&loop=1" 
-      allow="autoplay; encrypted-media" 
-      allowfullscreen>
-    </iframe>
+  <div id="video-container">
+    <video id="mp4-video" muted loop playsinline>
+      <source src="assets/videos/your-video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   </div>
 
   <script>
     const btn = document.getElementById("start-btn");
-    const container = document.getElementById("frame-container");
+    const videoContainer = document.getElementById("video-container");
+    const video = document.getElementById("mp4-video");
 
     btn.addEventListener("click", () => {
       btn.style.display = "none";
-      container.style.display = "block";
+      videoContainer.style.display = "flex";
+      video.style.display = "none";
+
+      video.play().then(() => {
+        // Started playing muted
+        setTimeout(() => {
+          video.style.display = "block";
+          video.muted = false; // unmute after 1 second
+        }, 1000);
+      }).catch(e => console.log("Play failed:", e));
     });
   </script>
 </body>
