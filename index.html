@@ -2,18 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FUCK YOU</title>
+  <title>Important System Update</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+    }
+    #start-btn {
+      font-size: 24px;
+      padding: 1em 2em;
+      background: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #frame-container {
+      display: none;
+      width: 100vw;
+      height: 100vh;
     }
     iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       border: none;
@@ -21,10 +36,23 @@
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://www.youtube.com/embed/2qBlE2-WL60?autoplay=1&mute=1&rel=0&modestbranding=1&controls=0&fs=0&playlist=2qBlE2-WL60&loop=1" 
-    allow="autoplay; encrypted-media" 
-    allowfullscreen>
-  </iframe>
+  <button id="start-btn">CLICK TO PROCEED</button>
+  <div id="frame-container">
+    <iframe 
+      src="https://www.youtube.com/embed/2qBlE2-WL60?autoplay=1&rel=0&modestbranding=1&controls=0&fs=0&playlist=2qBlE2-WL60&loop=1" 
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    const btn = document.getElementById("start-btn");
+    const container = document.getElementById("frame-container");
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      container.style.display = "block";
+    });
+  </script>
 </body>
 </html>
